@@ -29,8 +29,26 @@ class BasketTest {
                 aSingleItemPricedPerUnit(),
                 multipleItemsPricedPerUnit(),
                 aSingleItemPricedByWeight(),
-                multipleItemsPricedByWeight()
+                multipleItemsPricedByWeight(),
+                buyOneGetOneFreeItemPricedPerUnitTwoSameItems(),
+                buyOneGetOneFreeItemPricedPerUnitThreeSameItems(),
+                buyOneGetOneFreeItemPricedPerUnitFiveSameItems()
         );
+    }
+
+    private static Arguments buyOneGetOneFreeItemPricedPerUnitTwoSameItems() {
+        return Arguments.of("buy one get one free - two identical items", "1.00",
+                Arrays.asList(aBagOfWidgets(), aBagOfWidgets()));
+    }
+
+    private static Arguments buyOneGetOneFreeItemPricedPerUnitThreeSameItems() {
+        return Arguments.of("buy one get one free - three identical items", "2.00",
+                Arrays.asList(aBagOfWidgets(), aBagOfWidgets(), aBagOfWidgets()));
+    }
+
+    private static Arguments buyOneGetOneFreeItemPricedPerUnitFiveSameItems() {
+        return Arguments.of("buy one get one free - five identical items", "3.00",
+                Arrays.asList(aBagOfWidgets(), aBagOfWidgets(), aBagOfWidgets(), aBagOfWidgets(), aBagOfWidgets()));
     }
 
     private static Arguments aSingleItemPricedByWeight() {
@@ -57,15 +75,19 @@ class BasketTest {
     }
 
     private static Item aPintOfMilk() {
-        return new Product(new BigDecimal("0.49")).oneOf();
+        return new Product(new BigDecimal("0.49"), "1").oneOf();
     }
 
     private static Item aPackOfDigestives() {
-        return new Product(new BigDecimal("1.55")).oneOf();
+        return new Product(new BigDecimal("1.55"), "2").oneOf();
+    }
+
+    private static Item aBagOfWidgets() {
+        return new Product(new BigDecimal("1.00"), "3").oneOf();
     }
 
     private static WeighedProduct aKiloOfAmericanSweets() {
-        return new WeighedProduct(new BigDecimal("4.99"));
+        return new WeighedProduct(new BigDecimal("4.99"), "4");
     }
 
     private static Item twoFiftyGramsOfAmericanSweets() {
@@ -73,7 +95,7 @@ class BasketTest {
     }
 
     private static WeighedProduct aKiloOfPickAndMix() {
-        return new WeighedProduct(new BigDecimal("2.99"));
+        return new WeighedProduct(new BigDecimal("2.99"), "5");
     }
 
     private static Item twoHundredGramsOfPickAndMix() {
