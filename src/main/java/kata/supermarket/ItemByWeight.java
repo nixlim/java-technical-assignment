@@ -1,5 +1,7 @@
 package kata.supermarket;
 
+import kata.supermarket.discountschemes.DiscountSchemes;
+
 import java.math.BigDecimal;
 
 public class ItemByWeight implements Item {
@@ -14,5 +16,15 @@ public class ItemByWeight implements Item {
 
     public BigDecimal price() {
         return product.pricePerKilo().multiply(weightInKilos).setScale(2, BigDecimal.ROUND_HALF_UP);
+    }
+
+    @Override
+    public String id() {
+        return product.id();
+    }
+
+    @Override
+    public DiscountSchemes getDiscountScheme() {
+        return product.getDiscountScheme();
     }
 }
