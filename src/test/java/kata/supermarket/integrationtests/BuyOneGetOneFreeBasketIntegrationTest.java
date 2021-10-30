@@ -5,6 +5,8 @@ import kata.supermarket.Item;
 import kata.supermarket.WeighedProduct;
 import kata.supermarket.discountcalculators.BuyOneGetOneFreeDiscountCalculator;
 import kata.supermarket.discountcalculators.DiscountCalculator;
+import kata.supermarket.discountschemes.DiscountSchemes;
+import kata.supermarket.discountschemes.DiscountStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -25,7 +27,8 @@ class BuyOneGetOneFreeBasketIntegrationTest {
     @ParameterizedTest(name = "{0}")
     void basketProvidesTotalValueWithCorrectBuyOneGetOneFreeDiscountCalculation(String description, String expectedTotal, Iterable<Item> items) {
         DiscountCalculator discountCalculator = new BuyOneGetOneFreeDiscountCalculator();
-        final Basket basket = new Basket(discountCalculator);
+        DiscountStrategy discountStrategy = new DiscountStrategy(discountCalculator);
+        final Basket basket = new Basket(discountStrategy);
         items.forEach(basket::add);
         assertEquals(new BigDecimal(expectedTotal), basket.total());
     }
@@ -83,7 +86,7 @@ class BuyOneGetOneFreeBasketIntegrationTest {
     }
 
     private static WeighedProduct aKiloOfAmericanSweets() {
-        return new WeighedProduct(new BigDecimal("4.99"), "4");
+        return new WeighedProduct(new BigDecimal("4.99"), "4", DiscountSchemes.NONE);
     }
 
     private static Item twoFiftyGramsOfAmericanSweets() {
@@ -91,7 +94,7 @@ class BuyOneGetOneFreeBasketIntegrationTest {
     }
 
     private static WeighedProduct aKiloOfPickAndMix() {
-        return new WeighedProduct(new BigDecimal("2.99"), "5");
+        return new WeighedProduct(new BigDecimal("2.99"), "5", DiscountSchemes.NONE);
     }
 
     private static Item twoHundredGramsOfPickAndMix() {

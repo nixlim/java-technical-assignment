@@ -1,5 +1,7 @@
 package kata.supermarket;
 
+import kata.supermarket.discountschemes.DiscountSchemes;
+
 import java.math.BigDecimal;
 
 public class ItemByUnit implements Item {
@@ -15,6 +17,11 @@ public class ItemByUnit implements Item {
     }
 
     public String id() {
-        return this.product.id();
+        return product.id();
+    }
+
+    @Override
+    public DiscountSchemes getDiscountScheme() {
+        return product.getDiscountScheme();
     }
 }

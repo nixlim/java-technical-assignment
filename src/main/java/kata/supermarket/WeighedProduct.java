@@ -1,5 +1,7 @@
 package kata.supermarket;
 
+import kata.supermarket.discountschemes.DiscountSchemes;
+
 import java.math.BigDecimal;
 
 public class WeighedProduct {
@@ -7,10 +9,12 @@ public class WeighedProduct {
     private final String id;
 
     private final BigDecimal pricePerKilo;
+    private DiscountSchemes applicableDiscountScheme;
 
-    public WeighedProduct(final BigDecimal pricePerKilo, final String id) {
+    public WeighedProduct(final BigDecimal pricePerKilo, final String id, DiscountSchemes discountScheme) {
         this.pricePerKilo = pricePerKilo;
         this.id = id;
+        this.applicableDiscountScheme = discountScheme;
     }
 
     BigDecimal pricePerKilo() {
@@ -23,6 +27,10 @@ public class WeighedProduct {
 
     String id() {
         return id;
+    }
+
+    DiscountSchemes getDiscountScheme() {
+        return applicableDiscountScheme;
     }
 
 

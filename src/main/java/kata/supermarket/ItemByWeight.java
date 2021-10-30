@@ -1,5 +1,7 @@
 package kata.supermarket;
 
+import kata.supermarket.discountschemes.DiscountSchemes;
+
 import java.math.BigDecimal;
 
 public class ItemByWeight implements Item {
@@ -19,5 +21,10 @@ public class ItemByWeight implements Item {
     @Override
     public String id() {
         return product.id();
+    }
+
+    @Override
+    public DiscountSchemes getDiscountScheme() {
+        return product.getDiscountScheme();
     }
 }
