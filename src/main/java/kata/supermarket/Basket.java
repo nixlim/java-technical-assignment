@@ -53,13 +53,11 @@ public class Basket {
          * interact with something which provides that functionality.
          */
         private BigDecimal discounts() {
-                return discountCalculator.calculateDiscount(items());
+            return discountCalculator.calculateDiscount(items());
         }
 
         private BigDecimal calculate() {
             return subtotal().subtract(discounts());
         }
-
-
     }
 }

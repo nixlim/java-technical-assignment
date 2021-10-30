@@ -20,7 +20,6 @@ public class BuyOneGetOneFreeDiscountCalculator implements DiscountCalculator{
             return discountAmount;
         }
 
-
         Map<String, Integer> basketStats = getBasketStats(basket);
         Map<String, BigDecimal> priceTableForThisBasket = new HashMap<>();
 
